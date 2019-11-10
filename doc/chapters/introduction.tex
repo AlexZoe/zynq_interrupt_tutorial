@@ -1,0 +1,22 @@
+\section{Introduction}
+Interrupts are an essential part for communication between hardware and software.
+Using interrupts prevents wasting precious CPU clock cycles on polling as well as improving the systems' responsiveness.
+
+The Xilinx Zynq 7000 system-on-chip (SoC) series offers a number of interrupt ports between programmable logic (PL) - the FPGA side - and the processing system (PS) - the CPU.
+This requires a logic implementation on the FPGA side, which can be either one of the interrupt capable IP cores of Xilinx or a custom logic.
+On the CPU(s), software for configuring and receiving interrupts has to be executed.
+This software can be run bare-metal (without an operating system) or with an operating system such as Linux.
+The former is well covered by online tutorials and is pretty straight forward to get a working system.
+Accomplishing the same using Linux, however, is not that well covered despite being an integral part even when using trivial logic such as timers.
+\newline
+
+Since it required quite some effort collecting information from user manuals, forum posts and online documentation in order to get interrupts to work with Linux, I would like to spare others (and myself in the future) the trouble of having to repeat the same all over.
+\newline
+
+%This guide is split into two sections.
+Section~\ref{quick} is for the impatient and those who just want to get the job done without caring too much about the details.
+Therefore, presented information are kept to a minimum and as generally applicable to other systems as possible.
+A basic understanding of the work flow with Xilinx's Vivado, compiling a Linux image for a particular board and basic understanding of Linux device drivers are required.
+
+%The second part of this guide, Section~\ref{example}, is for those who want a more detailed explanation (or are new to the Zynq platform or Linux device drivers).
+%A basic example system is provided which demonstrates generating interrupt events using a timer in programmable logic and a device driver for processing the interrupt events.

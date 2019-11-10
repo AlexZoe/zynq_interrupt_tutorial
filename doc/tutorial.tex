@@ -1,0 +1,113 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{doclicense}
+
+\usepackage{listings}
+\usepackage{color}
+\definecolor{purple}{rgb}{0.502,0,0.502}
+\definecolor{amethyst}{rgb}{0.6,0.4,0.8}
+\definecolor{blue}{rgb}{0,0,0.8}
+\definecolor{black}{rgb}{1,1,1}
+\definecolor{lightgray}{gray}{0.3}
+\definecolor{gray}{gray}{0.6}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\renewcommand{\lstlistingname}{Code}
+\lstdefinestyle{hdl}	{
+    language=vhdl,
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{lightgray},
+    keywordstyle=\color{purple},
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{blue},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    xleftmargin=\parindent,
+    frame=L,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=10pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstdefinestyle{shell}	{
+    language=sh,
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{lightgray},
+    keywordstyle=\color{amethyst},
+    numberstyle=\small\color{gray},
+    stringstyle=\color{blue},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    xleftmargin=\parindent,
+    frame=L,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=10pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstdefinestyle{c}	{
+    language=c,
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{lightgray},
+    keywordstyle=\color{amethyst},
+    numberstyle=\small\color{gray},
+    stringstyle=\color{blue},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    xleftmargin=\parindent,
+    frame=L,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=10pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\geometry{
+    paper=a4paper, % Change to letterpaper for US letter
+    inner=2.0cm, %2.5cm, % Inner margin
+    outer=2.0cm, %3.8cm, % Outer margin
+    bindingoffset=.5cm, % Binding offset
+    top=1.5cm, % Top margin
+    bottom=1.5cm, % Bottom margin
+    %showframe, % Uncomment to show how the type block is set on the page
+}
+
+\author{Alexander Zoellner}
+\title{Tutorial for Hardware Interrupts with the Xilinx Zynq Platform Using Linux}
+
+\begin{document}
+
+\maketitle
+\begin{figure}[b]
+    \centering
+    \doclicenseThis
+\end{figure}
+
+
+\newpage
+
+\include{chapters/introduction}
+\include{chapters/quick_start}
+\include{chapters/demo_system}
+
+
+\end{document}

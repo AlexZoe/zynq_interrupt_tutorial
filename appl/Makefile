@@ -29,7 +29,7 @@ OBJS := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 # Makefile targets
 .PHONY: all analyze clean
 # Default target
-.DEFAULT: all
+.DEFAULT_GOAL := all
 
 all: $(BUILD_DIR) $(TARGET)
 

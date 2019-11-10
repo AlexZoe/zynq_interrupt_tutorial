@@ -1,0 +1,66 @@
+\section{Quick Solution}\label{quick}
+Getting PL interrupts to work in Linux requires a number of steps which can be
+summarized as following.
+
+\begin{itemize}
+    \item Enable PL-PS interrupt ports in the Processing System in Vivado
+    \item Connecting a port of an IP core to the enabled port
+    \item Adding a devicetree entry
+    \item Registering the interrupt in the device driver
+\end{itemize}
+
+
+Code~\ref{code:devicetree-binding} shows the entry for the devicetree for the device using the interrupt.
+The first line is the name of the node which can be chosen arbitrarily as long as it does not conflict one of the existing nodes.
+The second line (\emph{interrupt-parent}) references the \emph{phandle} of the interrupt handler of the system.
+The value between the braces has to match the one of the interrupt handlers phandle.
+The example shows the value \emph{0x4} since the devicetree binary (.dtb) has been decompiled back to the devicetree source (.dts) where all strings have been replaced by actual numbers.
+
+The last line (\emph{interrupts}) defines the actual interrupt to be used.
+In case of the general interrupt control of arm (which is used by the Zynq platform) interrupts are defined using three cells.
+The first cell is always set to zero (0) for PL interrupts (see Section~\ref{kernel}).
+
+The second cell is the interrupt number, which is the interrupt id of the PS which the PL connects to minus 32.
+The Zynq platform offers a total of 16 interrupt ports with interrupt ids 91 to 84 and from 68 to 61.
+The ports are connected lowest (0) to highest index (15) to the interrupt ids in the same manner, i.e. 61 to 91.
+Thus, port 0 connects to interrupt id 61, which in turn results in the interrupt number 29 (61 - 32).
+
+The last cell is used for defining the type and level of the interrupt, i.e. the condition which have to be met for an interrupt to occur.
+For PL interrupts the cell can either have the value 1 or 4.
+The former is \emph{low-to-high edge triggered} and the latter \emph{active high level-sensitive}.
+In most cases 1 is what you want for interrupts.
+
+SPI (shared processor interrupts), interrupt number, type and level
+\lstset{style=c, caption={Devicetree entry}}
+\begin{lstlisting}[label=code:devicetree-binding]
+    hw_timer_0 {
+        interrupt-parent = <0x4>;
+        interrupts = <0 29 1;
+    }
+\end{lstlisting}
+
+After compiling the devicetree source back to the devicetree binary the interrupt has to be registered by the device driver.
+
+Code~\ref{code:req-irq} shows a minimal example for requesting the interrupt number and registering an interrupt handler.
+The first two lines are the required header files which have to be included for devicetree related function calls.
+The lower part after (...) can be placed in either the \emph{init} or \emph{open} (prefered) function.
+The second argument of \emph{of\_find\_node\_by\_name} has to match the name used in the devicetree entry.
+Subsequently, the node is passed to \emph{irq\_of\_parse\_and\_map} for registering the interrupt number.
+The return value is the index of the interrupt which gets displayed in the first column when calling \emph{cat /proc/interrupts}.
+Lastly, \emph{request\_irg} installs the interrupt handler which gets called when an interrupt occurs.
+
+\lstset{style=c, caption={Device driver entry}}
+\begin{lstlisting}[label=code:req-irq]
+    #include <linux/of_irq.h>
+    #include <linux/of.h>
+
+        (...)
+
+    struct device_node *np;
+
+    np = of_find_node_by_name(NULL, "hw_timer_0");
+    timer_irq = irq_of_parse_and_map(np, 0);
+    request_irq(timer_irq, &timer_intr_handler, 0, "hw_timer_intr", NULL);
+\end{lstlisting}
+
+Please make sure that the hardware (PL) does not generate any interrupt events prior to successfully registering the interrupt.

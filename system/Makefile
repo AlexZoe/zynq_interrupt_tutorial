@@ -10,26 +10,25 @@
 #
 #-------------------------------------------------------------------------------
 
-PROJECT := hw_timer_interrupt
+PROJECT			:= hw_timer_interrupt
 
 XLNX_TOOL_CHAIN := /opt/Xilinx-18-3/xilinx-vivado-2018_3-settings.sh
-SHELL := /bin/bash
+SHELL			:= /bin/bash
 
-PRJ := timer
-SRC_DIR := hdl
-SCRIPT_DIR := tcl
-BUILD_DIR := build
+SRC_DIR			:= hdl
+SCRIPT_DIR		:= tcl
+BUILD_DIR		:= build
 
-SRCS := $(wildcard $(SRC_DIR)/*.v)
-
-ifdef XILINX_VIVADO_DIR_
+ifdef XILINX_VIVADO
 ENV_CMD :=
 else
 ENV_CMD := source $(XLNX_TOOL_CHAIN) &&
 endif
 
 .PHONY: system clean build_dir ip_core
-.DEFAULT: sim
+.DEFAULT_GOAL := all
+
+all: ip_core system
 
 system: build_dir
 	$(ENV_CMD) \
@@ -46,7 +45,7 @@ clean:
 	@rm -rf $(BUILD_DIR)/$(PROJECT)
 	@rm -rf $(BUILD_DIR)
 	@rm -rf *.log *.jou
-	@rm -rf hdl/xgui
-	@rm -rf hdl/component.xml
+	@rm -rf $(SRC_DIR)/xgui
+	@rm -rf $(SRC_DIR)/component.xml
 	@rm -rf .Xil
 	@rm -rf *.str

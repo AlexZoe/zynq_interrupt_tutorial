@@ -9,12 +9,12 @@
 #
 #-------------------------------------------------------------------------------
 
-PROJECT := hw_timer
+TARGET := hw_timer
 
 ifneq ($(KERNELRELEASE),)
 
 # Main object file
-obj-m := $(PROJECT).o
+obj-m := $(TARGET).o
 # List additional object files here
 #objs  :=
 
@@ -24,6 +24,7 @@ ifdef XILINX_VIVADO_DIR_
 export ARCH=arm
 export CROSS_COMPILE=arm-linux-gnueabihf-
 CC   := $(CROSS_COMPILE)gcc
+# Edit KDIR to point at your Xilinx linux-xlnx repositories
 KDIR ?= ~/dev/soc-linux-image/linux-xlnx/
 else
 KDIR ?= /lib/modules/$(shell uname -r)/build
@@ -40,7 +41,7 @@ clean:
 	@rm -rf *.o
 	@rm -rf *.ko
 	@rm -rf *.mod.*
-	@rm -rf .$(PROJECT)*
+	@rm -rf .$(TARGET)*
 	@rm -rf .tmp*
 	@rm -rf .built-in*
 
