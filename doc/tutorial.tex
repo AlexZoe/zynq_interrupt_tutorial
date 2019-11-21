@@ -7,6 +7,13 @@
 \usepackage{geometry}
 \usepackage{doclicense}
 
+%\usepackage[backend=bibtex,style=authoryear,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+\usepackage[backend=bibtex,style=numeric,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+
+\addbibresource{bibliograph.bib} % The filename of the bibliography
+
+\usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
+
 \usepackage{listings}
 \usepackage{color}
 \definecolor{purple}{rgb}{0.502,0,0.502}
@@ -105,9 +112,15 @@
 
 \newpage
 
+\tableofcontents
+
+\newpage
+
 \include{chapters/introduction}
 \include{chapters/quick_start}
 \include{chapters/demo_system}
+
+\printbibliography[heading=bibintoc]
 
 
 \end{document}

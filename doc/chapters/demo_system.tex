@@ -1,6 +1,26 @@
 \section{Hardware Timer Example}
 
+\subsection{Introduction}\label{demo-intro}
+This section describes the demonstrator system which uses a timer in programmable logic for generating interrupts on the Xilinx Zynq platform.
+
+
 \subsection{Prerequisites}
+The demonstrator system has been implemented on the Digilent Zybo Z7-20 board with Xilinx Vivado 2018-3.
+If you want to use the demonstrator system directly, the aforementioned board is required with a Vivado installation containing the board support package.
+Any Vivado installation \emph{should} work.
+If you use a Zybo Z7 board, a Vivado version 2018.x and later is more convenient since you will not have to backport devicetrees and menuconfig when building the Linux image.
+See Appendix~\ref{Vivado-bitstream} if you want to use a different board or are interested in how to manually build the system on the FPGA for generating the bitstream.
+
+Debian 9 with Linux kernel 4.19 is used as the Linux image on the Zybo board, which boots from a micro SD card.
+The image has been built using this \cite{DebianImage} guide.
+See Appendix~\ref{Linux-Image} for details regarding the Linux image.
+
+The prerequisites can be summarized as follows:
+\begin{itemize}
+\item Vivado installation (version 2017.x and later /emph{should} work)
+\item A evaluation board with a Zynq 7000 chip (e.g. ZedBoard, MicroZed, Zybo, Zybo Z7)
+\item Board support package for the board to be used in Vivado
+\end{itemize}
 
 \subsection{Hardware Implementation}
 

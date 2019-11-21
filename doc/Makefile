@@ -14,6 +14,7 @@
 
 all:
 	pdflatex tutorial.tex
+	pdflatex tutorial.tex
 
 clean:
 	@rm -rf chapters/*log
