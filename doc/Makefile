@@ -20,6 +20,9 @@ clean:
 	@rm -rf chapters/*log
 	@rm -rf chapters/*aux
 	@rm -rf *.log
+	@rm -rf *.xml
+	@rm -rf *.toc
+	@rm -rf *-blx.bib
 	@rm -rf *.aux
 	@rm -rf *.out
 	@rm -rf *.pdf
