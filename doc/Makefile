@@ -14,6 +14,8 @@
 
 all:
 	pdflatex tutorial.tex
+	bibtex tutorial.aux
+	pdflatex tutorial.tex
 	pdflatex tutorial.tex
 
 clean:
@@ -27,3 +29,5 @@ clean:
 	@rm -rf *.out
 	@rm -rf *.pdf
 	@rm -rf *.gz
+	@rm -rf *.bbl
+	@rm -rf *.blg
