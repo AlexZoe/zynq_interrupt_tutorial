@@ -20,4 +20,4 @@ set IP_REPO		"hdl"
 # Version info
 set IP_MAJOR	"1"
 set IP_MINOR	"0"
-set outputDir	../build
+set outputDir	build

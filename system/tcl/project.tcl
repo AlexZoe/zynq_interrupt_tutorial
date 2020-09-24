@@ -17,7 +17,7 @@ source tcl/settings.tcl
 
 ###################### Basic project setup part #########################
 #create_project ${MODULE} -in_memory -part ${CHIP}
-create_project -force ${outputDir}/${MODULE} -part ${CHIP} ${MODULE}
+create_project -force ../${outputDir}/${MODULE} -part ${CHIP} ${MODULE}
 
 # Set the board pre-sets
 set_property board_part ${BOARD} [current_project]
@@ -74,8 +74,8 @@ save_bd_design
 #current_project ${MODULE}
 validate_bd_design
 # Add system wrapper file
-make_wrapper -files [get_files ${MODULE}/${MODULE}.srcs/sources_1/bd/${MODULE}/${MODULE}.bd] -top
-add_files -norecurse ${MODULE}/${MODULE}.srcs/sources_1/bd/${MODULE}/hdl/${MODULE}_wrapper.v
+make_wrapper -files [get_files ${outputDir}/${MODULE}.srcs/sources_1/bd/${MODULE}/${MODULE}.bd] -top
+add_files -norecurse ${outputDir}/${MODULE}.srcs/sources_1/bd/${MODULE}/hdl/${MODULE}_wrapper.v
 # Synthesis run
 reset_run synth_1
 # Implementation run (routing/mapping) and bitstream generation

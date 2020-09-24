@@ -10,12 +10,10 @@
 #
 #-------------------------------------------------------------------------------
 
-PROJECT := hw_timer_interrupt
+# Location of Vivado settings when installed at /opt/
+XLNX_TOOL_CHAIN := /opt/Xilinx_18_3/Vivado/2018.3/settings64.sh
+SHELL			:= /bin/bash
 
-XLNX_TOOL_CHAIN := /opt/Xilinx-18-3/xilinx-vivado-2018_3-settings.sh
-SHELL := /bin/bash
-
-PRJ := timer
 SRC_DIR := hdl
 SCRIPT_DIR := tcl
 BUILD_DIR := build
@@ -31,7 +29,7 @@ endif
 .PHONY: system clean build_dir ip_core
 .DEFAULT: sim
 
-system: build_dir
+system: build_dir ip_core
 	$(ENV_CMD) \
 	vivado -mode batch -source $(SCRIPT_DIR)/project.tcl
 
@@ -43,7 +41,6 @@ build_dir:
 	mkdir -p $(BUILD_DIR)
 
 clean:
-	@rm -rf $(BUILD_DIR)/$(PROJECT)
 	@rm -rf $(BUILD_DIR)
 	@rm -rf *.log *.jou
 	@rm -rf hdl/xgui

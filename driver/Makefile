@@ -9,12 +9,12 @@
 #
 #-------------------------------------------------------------------------------
 
-PROJECT := hw_timer
+TARGET := hw_timer
 
 ifneq ($(KERNELRELEASE),)
 
 # Main object file
-obj-m := $(PROJECT).o
+obj-m := $(TARGET).o
 # List additional object files here
 #objs  :=
 
@@ -39,8 +39,8 @@ clean:
 	@rm -rf *.symvers
 	@rm -rf *.o
 	@rm -rf *.ko
-	@rm -rf *.mod.*
-	@rm -rf .$(PROJECT)*
+	@rm -rf *.mod*
+	@rm -rf .$(TARGET)*
 	@rm -rf .tmp*
 	@rm -rf .built-in*
 
