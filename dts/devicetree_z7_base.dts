@@ -448,9 +448,4 @@
 		reset-gpios = <0x8 0x2e 0x1>;
 		phandle = <0x7>;
 	};
-
-	hw_timer_0 {
-		interrupt-parent = <0x4>;
-		interrupts = <0 29 1>;
-	};
 };

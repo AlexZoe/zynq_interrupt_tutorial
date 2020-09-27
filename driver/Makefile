@@ -15,16 +15,16 @@ ifneq ($(KERNELRELEASE),)
 
 # Main object file
 obj-m := $(TARGET).o
-# List additional object files here
-#objs  :=
 
 else
 
-ifdef XILINX_VIVADO_DIR_
+# 'XILINX_VIVADO' gets defined when sourcing the Xilinx environment
+ifdef XILINX_VIVADO
 export ARCH=arm
 export CROSS_COMPILE=arm-linux-gnueabihf-
 CC   := $(CROSS_COMPILE)gcc
-KDIR ?= ~/dev/soc-linux-image/linux-xlnx/
+# Path to Xilinx kernel headers
+KDIR ?= ~/dev/projects/xilinx_repos/linux-xlnx/
 else
 KDIR ?= /lib/modules/$(shell uname -r)/build
 endif
